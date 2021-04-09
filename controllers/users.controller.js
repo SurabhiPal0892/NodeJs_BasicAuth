@@ -25,7 +25,7 @@ const getUsers = async function (req, res) {
   try {
     let pageOpts = getPageOpts(req.query.page, req.query.perPage);
     const data = await User.aggregate([
-      { $project: { email: 1, _id: 0 } },
+      { $project: { email: 1, _id: 1 } },
       { $skip: pageOpts.perPage * (pageOpts.page - 1) },
       { $limit: pageOpts.perPage },
     ]);
@@ -42,7 +42,7 @@ const getPageOpts = (page, perPage) => {
     pageOpts["perPage"] = parseInt(perPage);
   } else {
     pageOpts["page"] = 1;
-    pageOpts["perPage"] = 2;
+    pageOpts["perPage"] = 5;
   }
   return pageOpts;
 };

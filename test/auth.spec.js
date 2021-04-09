@@ -13,7 +13,7 @@ const invalidUserId = ObjectID("60703e6552b7f54c08f5b153");
 describe("Auth API", () => {
   //Test GET /users
   describe("POST /", () => {
-    it("It should save a new user in DB with 200", (done) => {
+    it("It should save a new user in DB with 200 if not exits", (done) => {
       chai
         .request(server)
         .post("/")
@@ -24,6 +24,26 @@ describe("Auth API", () => {
         .set({ token: token })
         .end((err, response) => {
           response.should.have.status(200);
+          response.body.should.be.a("Object");
+          done();
+        });
+    });
+  });
+
+  
+  describe("POST /", () => {
+    it("It should just return token to the user if exits with 200 ", (done) => {
+      chai
+        .request(server)
+        .post("/")
+        .send({
+          email: "surabhi.x.com",
+          password: "677888999",
+        })
+        .set({ token: token })
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.body.should.be.a("Object");
           done();
         });
     });

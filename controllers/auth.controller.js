@@ -12,7 +12,7 @@ const createUser = async function (req, res) {
     if (headerToken == process.env.AUTH_TOKEN) {
       const userData = createUserBody(req, res);
       let user = await checkIfUserExistsInDb(userData.email);
-      if (user.length > 0) {
+      if (user) {
         const isUserAuthenticated = await validatePassword(
           userData.password,
           user
@@ -75,7 +75,7 @@ const checkIfUserExistsInDb = async function (emailId) {
 
 const validatePassword = async function (password, user) {
   try {
-    const isValidPassword = await bcrypt.compare(password, user[0].password);
+    const isValidPassword = await bcrypt.compare(password, user.password);
     return isValidPassword;
   } catch (error) {
     console.log(error);
