@@ -18,7 +18,7 @@ describe("Auth API", () => {
         .request(server)
         .post("/")
         .send({
-          email: "surabhi.x.com",
+          email: "testing.gmail.com",
           password: "677888999",
         })
         .set({ token: token })
@@ -37,7 +37,7 @@ describe("Auth API", () => {
         .request(server)
         .post("/")
         .send({
-          email: "surabhi.x.com",
+          email: "testing.gmail.com",
           password: "677888999",
         })
         .set({ token: token })

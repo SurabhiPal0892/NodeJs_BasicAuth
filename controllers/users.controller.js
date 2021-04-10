@@ -49,7 +49,7 @@ const getPageOpts = (page, perPage) => {
 
 const checkIfUserIdExists = async function (id) {
   try {
-    let user = await User.find({ _id: ObjectID(id) }).exec();
+    let user = await UserTasks.find({ userId: ObjectID(id) }).exec();
     return user;
   } catch (error) {
     console.log(error);
